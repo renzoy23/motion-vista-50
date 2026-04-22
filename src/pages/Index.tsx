@@ -199,6 +199,30 @@ const reveal = (reducedMotion: boolean, delay = 0, axis: "x" | "y" = "y", distan
   transition: { duration: reducedMotion ? 0 : 0.72, delay: reducedMotion ? 0 : delay, ease: transitionEase },
 });
 
+const revealGroup = (reducedMotion: boolean, delayChildren = 0) => ({
+  initial: reducedMotion ? "visible" : "hidden",
+  whileInView: "visible",
+  viewport: { once: true, margin: "-80px" },
+  transition: reducedMotion
+    ? undefined
+    : {
+        staggerChildren: 0.12,
+        delayChildren,
+      },
+});
+
+const revealItem = (reducedMotion: boolean, distance = 24) => ({
+  hidden: { opacity: 0, y: reducedMotion ? 0 : distance },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: reducedMotion ? 0 : 0.72,
+      ease: transitionEase,
+    },
+  },
+});
+
 const SolutionVisual = ({ story, reducedMotion }: { story: Story; reducedMotion: boolean }) => {
   const Icon = story.icon;
 
@@ -710,13 +734,13 @@ const Index = () => {
             {stories.map((story, index) => (
               <div key={story.title} className="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
                 <motion.div
-                  {...reveal(reducedMotion, 0.04, story.align === "left" ? "x" : "y", 30)}
+                  {...revealGroup(!!reducedMotion, 0.04)}
                   className={`${story.align === "left" ? "lg:order-2" : ""}`}
                 >
-                  <span className="section-label">{story.eyebrow}</span>
-                  <h2 className="text-display max-w-[12ch] text-4xl text-foreground md:text-5xl">{story.title}</h2>
-                  <p className="mt-6 max-w-xl text-body">{story.body}</p>
-                  <ul className="mt-8 space-y-3">
+                  <motion.span variants={revealItem(!!reducedMotion, 18)} className="section-label">{story.eyebrow}</motion.span>
+                  <motion.h2 variants={revealItem(!!reducedMotion, 22)} className="text-display max-w-[12ch] text-4xl text-foreground md:text-5xl">{story.title}</motion.h2>
+                  <motion.p variants={revealItem(!!reducedMotion, 24)} className="mt-6 max-w-xl text-body">{story.body}</motion.p>
+                  <motion.ul variants={revealItem(!!reducedMotion, 26)} className="mt-8 space-y-3">
                     {story.points.map((point) => (
                       <li key={point} className="flex items-center gap-3 text-base text-foreground">
                         <span className="flex h-6 w-6 items-center justify-center rounded-full bg-brand/10 text-brand">
@@ -725,11 +749,13 @@ const Index = () => {
                         {point}
                       </li>
                     ))}
-                  </ul>
-                  <Button variant="secondary" size="lg" className="mt-8">
-                    {story.cta}
-                    <ArrowRight className="h-4 w-4" />
-                  </Button>
+                  </motion.ul>
+                  <motion.div variants={revealItem(!!reducedMotion, 28)}>
+                    <Button variant="secondary" size="lg" className="mt-8">
+                      {story.cta}
+                      <ArrowRight className="h-4 w-4" />
+                    </Button>
+                  </motion.div>
                 </motion.div>
 
                 <div className={`${story.align === "left" ? "lg:order-1" : ""}`}>
@@ -742,20 +768,20 @@ const Index = () => {
 
         <section className="section-shell">
           <div className="container grid items-center gap-14 lg:grid-cols-[0.9fr_1.1fr]">
-            <motion.div {...reveal(reducedMotion)}>
-              <span className="section-label">Connected system</span>
-              <h2 className="text-display max-w-[12ch] text-4xl text-foreground md:text-5xl">A continuous loop that turns insight into momentum.</h2>
-              <p className="mt-6 max-w-xl text-body">
+            <motion.div {...revealGroup(!!reducedMotion)}>
+              <motion.span variants={revealItem(!!reducedMotion, 18)} className="section-label">Connected system</motion.span>
+              <motion.h2 variants={revealItem(!!reducedMotion, 22)} className="text-display max-w-[12ch] text-4xl text-foreground md:text-5xl">A continuous loop that turns insight into momentum.</motion.h2>
+              <motion.p variants={revealItem(!!reducedMotion, 24)} className="mt-6 max-w-xl text-body">
                 Instead of isolated studies, Averra creates a feedback engine. Every experiment sharpens the next decision, every campaign teaches the next launch, and every market signal stays connected.
-              </p>
-              <div className="mt-8 grid gap-4 sm:grid-cols-2">
+              </motion.p>
+              <motion.div variants={revealItem(!!reducedMotion, 28)} className="mt-8 grid gap-4 sm:grid-cols-2">
                 {loopSteps.map((step) => (
                   <div key={step.title} className="rounded-[1.5rem] border border-divider/70 bg-surface/90 p-5 shadow-soft">
                     <p className="text-lg font-semibold text-foreground">{step.title}</p>
                     <p className="mt-2 text-sm leading-6 text-muted-foreground">{step.body}</p>
                   </div>
                 ))}
-              </div>
+              </motion.div>
             </motion.div>
 
             <motion.div {...reveal(reducedMotion, 0.08)} className="relative flex items-center justify-center">
