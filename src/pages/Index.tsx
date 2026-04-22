@@ -852,10 +852,10 @@ const Index = () => {
 
         <section className="section-shell">
           <div className="container">
-            <motion.div {...reveal(reducedMotion)} className="max-w-2xl">
-              <span className="section-label">Why teams choose Averra</span>
-              <h2 className="text-display text-4xl text-foreground md:text-5xl">A platform designed for enterprise confidence, not dashboard fatigue.</h2>
-              <p className="mt-6 text-body">Every interaction is built to feel strategic, quick, and premium — from first signal to final recommendation.</p>
+            <motion.div {...revealGroup(!!reducedMotion)} className="max-w-2xl">
+              <motion.span variants={revealItem(!!reducedMotion, 18)} className="section-label">Why teams choose Averra</motion.span>
+              <motion.h2 variants={revealItem(!!reducedMotion, 22)} className="text-display text-4xl text-foreground md:text-5xl">A platform designed for enterprise confidence, not dashboard fatigue.</motion.h2>
+              <motion.p variants={revealItem(!!reducedMotion, 24)} className="mt-6 text-body">Every interaction is built to feel strategic, quick, and premium — from first signal to final recommendation.</motion.p>
             </motion.div>
 
             <div className="mt-12 grid gap-5 md:grid-cols-2 xl:grid-cols-3">
@@ -885,8 +885,8 @@ const Index = () => {
 
         <section id="proof" className="section-shell">
           <div className="container grid gap-8 xl:grid-cols-[1.15fr_0.85fr]">
-            <motion.div {...reveal(reducedMotion)} className="rounded-[2rem] border border-divider/70 bg-surface p-8 shadow-panel md:p-10">
-              <span className="section-label">Customer proof</span>
+            <motion.div {...revealGroup(!!reducedMotion)} className="rounded-[2rem] border border-divider/70 bg-surface p-8 shadow-panel md:p-10">
+              <motion.span variants={revealItem(!!reducedMotion, 18)} className="section-label">Customer proof</motion.span>
               <div className="relative min-h-[22rem]">
                 <AnimatePresence mode="wait">
                   <motion.div
@@ -950,23 +950,23 @@ const Index = () => {
         <section id="final-cta" className="section-shell pb-24">
           <div className="container">
             <motion.div
-              {...reveal(reducedMotion)}
+              {...revealGroup(!!reducedMotion)}
               className="relative overflow-hidden rounded-[2.5rem] border border-divider/70 bg-cta px-8 py-12 shadow-panel md:px-14 md:py-16"
             >
               <div className="absolute inset-0 opacity-70" />
               <div className="relative z-10 max-w-3xl">
-                <span className="section-label">Ready when your team is</span>
-                <h2 className="text-display text-4xl text-foreground md:text-6xl">Build a sharper growth engine around what customers actually signal.</h2>
-                <p className="mt-6 max-w-2xl text-body">
+                <motion.span variants={revealItem(!!reducedMotion, 18)} className="section-label">Ready when your team is</motion.span>
+                <motion.h2 variants={revealItem(!!reducedMotion, 22)} className="text-display text-4xl text-foreground md:text-6xl">Build a sharper growth engine around what customers actually signal.</motion.h2>
+                <motion.p variants={revealItem(!!reducedMotion, 24)} className="mt-6 max-w-2xl text-body">
                   Replace fragmented reporting with a premium system for testing, learning, and action. Your next board-ready insight can start with one conversation.
-                </p>
-                <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+                </motion.p>
+                <motion.div variants={revealItem(!!reducedMotion, 28)} className="mt-10 flex flex-col gap-4 sm:flex-row">
                   <Button variant="hero" size="xl">
                     Book your strategy demo
                     <ArrowRight className="h-4 w-4" />
                   </Button>
                   <Button variant="secondary" size="xl">See the platform tour</Button>
-                </div>
+                </motion.div>
               </div>
             </motion.div>
           </div>
