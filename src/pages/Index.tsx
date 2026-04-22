@@ -200,19 +200,24 @@ const reveal = (reducedMotion: boolean, delay = 0, axis: "x" | "y" = "y", distan
 });
 
 const revealGroup = (reducedMotion: boolean, delayChildren = 0) => ({
-  initial: reducedMotion ? "visible" : "hidden",
+  initial: reducedMotion ? false : "hidden",
   whileInView: "visible",
-  viewport: { once: true, margin: "-80px" },
-  transition: reducedMotion
-    ? undefined
-    : {
-        staggerChildren: 0.12,
-        delayChildren,
-      },
+  viewport: { once: true, margin: "-80px", amount: 0.28 },
+  variants: {
+    hidden: {},
+    visible: {
+      transition: reducedMotion
+        ? undefined
+        : {
+            staggerChildren: 0.12,
+            delayChildren,
+          },
+    },
+  },
 });
 
 const revealItem = (reducedMotion: boolean, distance = 24) => ({
-  hidden: { opacity: 0, y: reducedMotion ? 0 : distance },
+  hidden: { opacity: reducedMotion ? 1 : 0, y: reducedMotion ? 0 : distance },
   visible: {
     opacity: 1,
     y: 0,
