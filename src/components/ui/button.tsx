@@ -10,7 +10,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         default: "bg-brand text-brand-foreground shadow-glow hover:shadow-panel",
-        hero: "bg-brand text-brand-foreground shadow-glow hover:shadow-panel",
+        hero: "border border-transparent bg-[image:var(--gradient-brand)] text-primary-foreground shadow-glow hover:shadow-panel",
         secondary: "border border-divider bg-surface text-foreground shadow-soft hover:border-brand/30 hover:bg-surface-strong hover:shadow-panel",
         outline: "border border-divider bg-transparent text-foreground shadow-none hover:border-brand/35 hover:bg-surface",
         soft: "bg-surface-muted text-foreground shadow-soft hover:bg-surface hover:shadow-panel",
